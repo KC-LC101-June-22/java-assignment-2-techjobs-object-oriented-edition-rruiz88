@@ -53,4 +53,35 @@ public class JobTest {
         assertFalse(sameJob.equals(notSameJob));
     }
 
+
+    @Test
+    public void testToStringStartsAndEndsWithNewLine() {
+        Job newLineJob = new Job("Line cook", new Employer("Wendy's"), new Location("Independence"),
+                new PositionType("cook"), new CoreCompetency("On time"));
+        String jobInfo = "ID: 1\nName: Line cook\nEmployer: Wendy's\nLocation: Independence\nPosition Type: cook\nCore Competency: On time";
+        char firstChar = newLineJob.toString().charAt(0);
+        char lastChar = newLineJob.toString().charAt(newLineJob.toString().length()-1);
+        assertEquals('\n' + jobInfo + '\n', newLineJob.toString());
+        assertEquals(firstChar, '\n');
+        assertEquals(lastChar, '\n');
+    }
+
+
+    @Test
+    public void testToStringContainsCorrectLabelsAndData() {
+        Job correctDataJob = new Job("Racecar driver", new Employer("FORD"), new Location("Detroit"),
+                new PositionType("Driver"), new CoreCompetency("Stamina"));
+        String correct = "\nID: 1\nName: Racecar driver\nEmployer: FORD\nLocation: Detroit\nPosition Type: Driver\nCore Competency: Stamina\n";
+        assertEquals(correct, correctDataJob.toString());
+    }
+
+
+    @Test
+    public void testToStringHandlesEmptyField() {
+        Job emptyJob = new Job("Racecar driver", new Employer("FORD"), new Location(""),
+                new PositionType("Driver"), new CoreCompetency(""));
+        String correct = "\nID: 1\nName: Racecar driver\nEmployer: FORD\nLocation: Data not available\nPosition Type: Driver\nCore Competency: Data not available\n";
+        assertEquals(correct, emptyJob.toString());
+    }
+
 }

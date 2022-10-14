@@ -6,12 +6,11 @@ public class Job {
 
     private int id;
     private static int nextId = 1;
-
     private String name;
-
-
-
     private Employer employer;
+    private Location location;
+    private PositionType positionType;
+    private CoreCompetency coreCompetency;
 
     public String getName() {
         return name;
@@ -34,12 +33,12 @@ public class Job {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Job job = (Job) o;
-        return id == job.id;
+        return getId() == job.getId();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(getId());
     }
 
     public void setPositionType(PositionType positionType) {
@@ -62,7 +61,7 @@ public class Job {
         this.employer = employer;
     }
 
-    private Location location;
+
 
     public CoreCompetency getCoreCompetency() {
         return coreCompetency;
@@ -72,8 +71,7 @@ public class Job {
         this.coreCompetency = coreCompetency;
     }
 
-    private PositionType positionType;
-    private CoreCompetency coreCompetency;
+
 
     // TODO: Add two constructors - one to initialize a unique ID and a second to initialize the
     //  other five fields. The second constructor should also call the first in order to initialize
@@ -89,6 +87,38 @@ public class Job {
         this.location = location;
         this.positionType = positionType;
         this.coreCompetency = coreCompetency;
+    }
+
+    @Override
+    public String toString() {
+        if (Job.this.employer.getValue().isEmpty() && Job.this.location.getValue().isEmpty() &&
+                Job.this.positionType.getValue().isEmpty() && Job.this.coreCompetency.getValue().isEmpty()) {
+            return "OOPS! This job does not seem to exist.";
+        }
+        if (name.isEmpty()) {
+            setName("Data not available");
+        }
+        if (Job.this.employer.getValue().isEmpty()) {
+            this.employer.setValue("Data not available");
+        }
+        if (Job.this.location.getValue().isEmpty()) {
+            this.location.setValue("Data not available");
+        }
+        if (Job.this.positionType.getValue().isEmpty()) {
+            this.positionType.setValue("Data not available");
+        }
+        if (Job.this.coreCompetency.getValue().isEmpty()) {
+            this.coreCompetency.setValue("Data not available");
+        }
+
+        return "\n" +
+                "ID: " + id +
+                "\nName: " + name +
+                "\nEmployer: " + employer +
+                "\nLocation: " + location +
+                "\nPosition Type: " + positionType +
+                "\nCore Competency: " + coreCompetency +
+                '\n';
     }
 
     // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
