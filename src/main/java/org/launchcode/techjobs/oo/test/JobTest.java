@@ -53,17 +53,17 @@ public class JobTest {
         assertFalse(sameJob.equals(notSameJob));
     }
 
-
+    //test toString before creating it
     @Test
     public void testToStringStartsAndEndsWithNewLine() {
         Job newLineJob = new Job("Line cook", new Employer("Wendy's"), new Location("Independence"),
                 new PositionType("cook"), new CoreCompetency("On time"));
-        String jobInfo = "ID: 1\nName: Line cook\nEmployer: Wendy's\nLocation: Independence\nPosition Type: cook\nCore Competency: On time";
-        char firstChar = newLineJob.toString().charAt(0);
-        char lastChar = newLineJob.toString().charAt(newLineJob.toString().length()-1);
-        assertEquals('\n' + jobInfo + '\n', newLineJob.toString());
-        assertEquals(firstChar, '\n');
-        assertEquals(lastChar, '\n');
+//        String jobInfo = "ID: 1\nName: Line cook\nEmployer: Wendy's\nLocation: Independence\nPosition Type: cook\nCore Competency: On time";
+//        char firstChar = newLineJob.toString().charAt(0);
+//        char lastChar = newLineJob.toString().charAt(newLineJob.toString().length()-1);
+        //assertEquals('\n' + jobInfo + '\n', newLineJob.toString());
+        assertEquals('\n', newLineJob.toString().charAt(0));
+        assertEquals('\n', newLineJob.toString().charAt(newLineJob.toString().length()-1));
     }
 
 
@@ -84,4 +84,11 @@ public class JobTest {
         assertEquals(correct, emptyJob.toString());
     }
 
+    //Bonus only id return oops
+    @Test
+    public void testOnlyId() {
+        Job idOnly = new Job("",new Employer(""),new Location(""),new PositionType(""),new CoreCompetency(""));
+        String onlyIdMessage = "OOPS! This job does not seem to exist.";
+        assertEquals(onlyIdMessage, idOnly.toString());
+    }
 }
